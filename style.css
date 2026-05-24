@@ -29,6 +29,44 @@ body
     text-decoration: none;
     box-sizing: border-box;
 }
+
+.portfolio .portfolio-item-inner
+{
+    position: relative;
+    margin-top: 50px;
+}
+.portfolio .portfolio-item-inner .boutton{
+    position: absolute;
+
+    cursor: pointer;  
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    border: none;
+    display: block;
+    border-radius: 40px;
+    padding: 12px 35px;
+    color: white;
+    background: var(--skins-color);
+    margin-top: 10px;
+    margin-left: 130px;
+
+}
+
+.portfolio .portfolio-item-inner .boutton i
+{
+    margin-right: 10px;
+}
+.portfolio .portfolio-item-inner:hover .boutton
+{
+    opacity: 1;
+}
+
+.portfolio .portfolio-item-inner .boutton:hover
+{
+    transform: translate(-50%,-50%) scale(1.05);
+}
+
 ::before,::after
 {
     box-sizing: border-box;
