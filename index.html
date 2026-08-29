@@ -415,7 +415,7 @@
                     <div class="contact-info-item">
                         <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
                         <h4>Office</h4>
-                        <a href="https://www.google.com/maps/place/Douala,+Cameroon/@4.048291,9.765231,13z/data=!3m1!4b1!4m5!3m4!1s0x107b5d8d8d8d8d8d:0x107b5d8d8d8d8d8d!8m2!3d4.048291!4d9.765231" style="text-decoration: none;" target="_blank"><p> Douala-CAMEROUN </p></a>
+                        <a href="https://www.google.com/maps/place/akwa+nord+Douala,+Cameroon/@4.048291,9.765231,13z/data=!3m1!4b1!4m5!3m4!1s0x107b5d8d8d8d8d8d:0x107b5d8d8d8d8d8d!8m2!3d4.048291!4d9.765231" style="text-decoration: none;" target="_blank"><p> Akwa nord Douala-CAMEROUN</p></a>
                     </div>
                     <!-- ==== Contact info item End ====-->
                       <!-- ==== Contact info item start ====-->
@@ -429,7 +429,7 @@
                     <div class="contact-info-item">
                         <div class="icon"><i class="fa fa-globe-europe"></i></div>
                         <h4>Website</h4>
-                        <p> www.fabricentocko.ltsa.cm </p>
+                       <p> www.fabricentocko.ltsa.cm </p>
                     </div>
                     <!-- ==== Contact info item End ====-->
                 </div>
@@ -438,31 +438,33 @@
                 <!-- ==== Contact Form ====-->
                  <div class="row">
                     <div class="contact-form padd-15">
-                        <div class="row">
-                            <div class="form-item col-6 padd-15">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name">
+                        <form id="contact-form">
+                            <div class="row">
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Subject">
+                                    </div>
+                                </div>
+                                <div class="form-item col-6 padd-15">
+                                    <div class="form-group">
+                                        <textarea name="" class="form-control" id="" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-item col-6 padd-15">
+                                <button type="submit" class="btn"> Envoyez le message</button>
                                 </div>
                             </div>
-                             <div class="form-item col-6 padd-15">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email">
-                                </div>
-                            </div>
-                             <div class="form-item col-6 padd-15">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Subject">
-                                </div>
-                            </div>
-                             <div class="form-item col-6 padd-15">
-                                <div class="form-group">
-                                    <textarea name="" class="form-control" id="" placeholder="Message"></textarea>
-                                </div>
-                            </div>
-                             <div class="form-item col-6 padd-15">
-                               <button type="submit" class="btn"> Envoyez le message</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                  </div>
              </div>
@@ -495,5 +497,40 @@
       referrerpolicy="no-referrer"></script>
      <script src="js/script.js"></script>
      <script src="js/style-switcher.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+     <script>
+        emailjs.init("T1M_J5ksPNwhKFj85");
+     </script>
+     <script>
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche le formulaire de se soumettre normalement
+
+            // Récupère les valeurs des champs du formulaire
+            const name = contactForm.querySelector('input[placeholder="Name"]').value;
+            const email = contactForm.querySelector('input[placeholder="Email"]').value;
+            const subject = contactForm.querySelector('input[placeholder="Subject"]').value;
+            const message = contactForm.querySelector('textarea[placeholder="Message"]').value;
+
+            // Prépare les paramètres pour l'envoi de l'email
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message
+            };
+
+            // Envoie l'email via EmailJS
+            emailjs.send('service_j4r8wzp', 'template_g1tqllw', templateParams)
+                .then(function(response) {
+                    console.log('Email envoyé avec succès !', response.status, response.text);
+                    alert('Merci pour votre message ! Je vous répondrai bientôt.');
+                    contactForm.reset(); // Réinitialise le formulaire après l'envoi
+                }, function(error) {
+                    console.error('Erreur lors de l\'envoi de l\'email :', error);
+                    alert('Une erreur est survenue. Veuillez réessayer plus tard.');
+                });
+        });
+     </script>
 </body>
 </html>
